@@ -519,6 +519,7 @@ name = "danmaku"
 version = "0.0.0"
 dependencies = [
  "anyhow",
+ "log",
  "serde",
  "serde_json",
  "tauri",

@@ -9,15 +9,27 @@ use window_vibrancy::{apply_acrylic, clear_acrylic};
 
 #[tauri::command]
 fn enable_background(app: AppHandle) -> Result<()> {
+  log::info!("Enable background");
   let window = app.get_window("main").unwrap();
-  let _ = apply_acrylic(&window, Some((18, 18, 18, 125)));
+  let result = apply_acrylic(&window, Some((18, 18, 18, 125)));
+
+  if let Err(error) = result {
+    log::error!("{}", error);
+  }
+
   Ok(())
 }
 
 #[tauri::command]
 fn disable_background(app: AppHandle) -> Result<()> {
+  log::info!("Disable background");
   let window = app.get_window("main").unwrap();
-  let _ = clear_acrylic(&window);
+  let result = clear_acrylic(&window);
+
+  if let Err(error) = result {
+    log::error!("{}", error);
+  }
+
   Ok(())
 }
 
