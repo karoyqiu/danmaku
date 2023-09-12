@@ -37,7 +37,11 @@ export default function DanmakuPage() {
     >
       {items.map((item) => (
         <div key={item.id} className="chat chat-start">
-          <div className="chat-header">{item.user}</div>
+          <div className="chat-image avatar placeholder">
+            <div className="w-8 bg-neutral-focus text-neutral-content rounded-full">
+              {item.user.substring(0, 1)}
+            </div>
+          </div>
           <div className="chat-bubble text-sky-300">{item.message}</div>
         </div>
       ))}
