@@ -1,53 +1,40 @@
-import { useState } from "react";
-import reactLogo from "./assets/react.svg";
-import { invoke } from "@tauri-apps/api/tauri";
-import "./App.css";
+import { invoke } from '@tauri-apps/api/tauri';
+import { appWindow } from '@tauri-apps/api/window';
+import React from 'react';
 
-function App() {
-  const [greetMsg, setGreetMsg] = useState("");
-  const [name, setName] = useState("");
+export default function App() {
+  const [dragging, setDragging] = React.useState(false);
 
-  async function greet() {
-    // Learn more about Tauri commands at https://tauri.app/v1/guides/features/command
-    setGreetMsg(await invoke("greet", { name }));
-  }
+  React.useEffect(() => {
+    const unlisten = appWindow.onFocusChanged(async (event) => {
+      if (event.payload) {
+        await invoke('enable_background');
+      } else {
+        setDragging(false);
+        await invoke('disable_background');
+      }
+    });
+
+    return () => {
+      unlisten.then((fn) => fn()).catch(() => {});
+    };
+  }, []);
 
   return (
-    <div className="container">
-      <h1>Welcome to Tauri!</h1>
-
-      <div className="row">
-        <a href="https://vitejs.dev" target="_blank">
-          <img src="/vite.svg" className="logo vite" alt="Vite logo" />
-        </a>
-        <a href="https://tauri.app" target="_blank">
-          <img src="/tauri.svg" className="logo tauri" alt="Tauri logo" />
-        </a>
-        <a href="https://reactjs.org" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-
-      <p>Click on the Tauri, Vite, and React logos to learn more.</p>
-
-      <form
-        className="row"
-        onSubmit={(e) => {
-          e.preventDefault();
-          greet();
-        }}
-      >
-        <input
-          id="greet-input"
-          onChange={(e) => setName(e.currentTarget.value)}
-          placeholder="Enter a name..."
-        />
-        <button type="submit">Greet</button>
-      </form>
-
-      <p>{greetMsg}</p>
+    <div
+      onMouseEnter={() => invoke('enable_background')}
+      onMouseLeave={async () => {
+        if (!dragging) {
+          await invoke('disable_background');
+        }
+      }}
+      onMouseDown={async () => {
+        setDragging(true);
+        await appWindow.startDragging();
+      }}
+      style={{ width: '100%', height: '100%' }}
+    >
+      aaa
     </div>
   );
 }
-
-export default App;

@@ -12,16 +12,16 @@
   },
   "tauri": {
     "allowlist": {
-      "all": false,
-      "shell": {
-        "all": false,
-        "open": true
+      "window": {
+        "setDecorations": true,
+        "setAlwaysOnTop": true,
+        "startDragging": true
       }
     },
     "bundle": {
       "active": true,
       "targets": "all",
-      "identifier": "com.tauri.dev",
+      "identifier": "danmaku.karoyqiu.gmail.com",
       "icon": [
         "icons/32x32.png",
         "icons/128x128.png",
@@ -37,6 +37,8 @@
       {
         "fullscreen": false,
         "resizable": true,
+        "transparent": true,
+        "decorations": false,
         "title": "danmaku",
         "width": 800,
         "height": 600
