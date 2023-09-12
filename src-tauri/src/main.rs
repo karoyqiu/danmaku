@@ -23,6 +23,7 @@ fn disable_background(app: AppHandle) -> Result<()> {
 
 fn main() {
   tauri::Builder::default()
+    .plugin(tauri_plugin_window_state::Builder::default().build())
     .invoke_handler(tauri::generate_handler![
       enable_background,
       disable_background

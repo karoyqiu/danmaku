@@ -22,6 +22,7 @@ export default function App() {
 
   return (
     <div
+      className="flex flex-col-reverse gap-0 text-sky-400"
       onMouseEnter={() => invoke('enable_background')}
       onMouseLeave={async () => {
         if (!dragging) {
@@ -34,7 +35,12 @@ export default function App() {
       }}
       style={{ width: '100%', height: '100%' }}
     >
-      aaa
+      <span>aaa</span>
+      <span>aaa</span>
+      <span>aaa</span>
+      <span>aaa</span>
+      <span>aaa</span>
+      <span>aaa</span>
     </div>
   );
 }
