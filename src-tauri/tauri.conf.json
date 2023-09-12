@@ -22,7 +22,7 @@
       }
     },
     "bundle": {
-      "active": true,
+      "active": false,
       "targets": "all",
       "identifier": "danmaku.karoyqiu.gmail.com",
       "icon": [
@@ -34,7 +34,7 @@
       ]
     },
     "security": {
-      "csp": "default-src 'self'"
+      "csp": "default-src 'self'; connect-src 'self' wss://broadcastlv.chat.bilibili.com:2245; img-src 'self' data:"
     },
     "windows": [
       {
